@@ -2,3 +2,8 @@ syntax: glob
 
 *.dep
 *.zo
+
+*.html
+*.css
+*.js
+*.sxref

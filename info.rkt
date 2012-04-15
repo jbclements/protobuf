@@ -21,7 +21,7 @@
 (define blurb
   '("Protocol Buffer serialization library and ProtoC code generator plugin"))
 (define categories
-  '(io))
+  '(io net))
 
 (define version
   "1.0.0")
@@ -33,3 +33,7 @@
   '("protoc-gen-racket"))
 (define racket-launcher-flags
   '(("-p" "murphy/protobuf:1/generator" "-m-")))
+
+(define scribblings
+  '(("scribblings/main.scrbl" (multi-page) (interop))
+    ("scribblings/generator.scrbl" (multi-page) (tool))))
