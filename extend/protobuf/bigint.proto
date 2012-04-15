@@ -1,0 +1,10 @@
+package extend.protobuf;
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions {
+  // Explicitly changes the ten byte size restriction for uint64 or
+  // sint64 types to allow big integers. If set to zero, the size of
+  // the type is not limited.
+  optional uint32 max_size = 76884 [default = 10];
+}
