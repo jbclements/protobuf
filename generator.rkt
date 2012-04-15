@@ -25,7 +25,7 @@
  racket/path
  racket/port
  racket/pretty
- "interface.rkt"
+ "main.rkt"
  "google/protobuf/descriptor.rkt"
  "google/protobuf/compiler/plugin.rkt"
  "extend/protobuf/bigint.rkt")

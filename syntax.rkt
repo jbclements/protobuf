@@ -27,7 +27,7 @@
  racket/promise
  racket/set
  "encoding.rkt"
- "interface.rkt")
+ "reflection.rkt")
 
 (define-syntax (define-primitive-type stx)
   (syntax-case stx ()
