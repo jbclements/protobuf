@@ -28,3 +28,8 @@
 
 (define primary-file
   "main.rkt")
+
+(define racket-launcher-names
+  '("protoc-gen-racket"))
+(define racket-launcher-flags
+  '(("-p" "murphy/protobuf:1/protoc-gen-racket" "-m-")))

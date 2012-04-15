@@ -19,6 +19,7 @@
 (require
  srfi/26
  (only-in srfi/13 string-null? string-prefix? string-index-right)
+ racket/contract
  racket/match
  racket/list
  racket/path
@@ -48,6 +49,11 @@
         (cut format "~a:~a" prefix <>)
         values)
     string->symbol))
+
+(provide/contract
+ [proto-string->symbol
+  (->* (string?) (any/c)
+       symbol?)])
 
 (define (register-types! types proto)
   (let ([package (cond
@@ -90,6 +96,24 @@
                 (retry (substring
                         package
                         0 (or (string-index-right package #\.) 0))))))))
+
+(provide/contract
+ [register-types!
+  (-> (hash/c string? (cons/c symbol? symbol?) #:immutable #f) file-descriptor-proto?
+      any)]
+ [register-enum-type!
+  (->* ((hash/c string? (cons/c symbol? symbol?) #:immutable #f)
+        (or/c string? #f) enum-descriptor-proto?)
+       (any/c)
+       any)]
+ [register-message-types!
+  (->* ((hash/c string? (cons/c symbol? symbol?) #:immutable #f)
+        (or/c string? #f) descriptor-proto?)
+       (any/c)
+       any)]
+ [type-ref
+  (-> (hash/c string? (cons/c symbol? symbol?) #:immutable 'dont-care)
+      string? string? (cons/c symbol? symbol?))])
 
 (define (translate-types types proto)
   (let ([package (cond
@@ -236,6 +260,25 @@
        [else
         null]))))
 
+(provide/contract
+ [translate-types
+  (-> (hash/c string? (cons/c symbol? symbol?)) file-descriptor-proto?
+      list?)]
+ [translate-enum-type
+  (->* ((hash/c string? (cons/c symbol? symbol?))
+        (or/c string? #f) enum-descriptor-proto?)
+       (any/c)
+       any/c)]
+ [translate-message-types
+  (->* ((hash/c string? (cons/c symbol? symbol?))
+        (or/c string? #f) descriptor-proto?)
+       (any/c)
+       list?)]
+ [translate-extension
+  (-> (hash/c string? (cons/c symbol? symbol?))
+      (or/c string? #f) field-descriptor-proto?
+      any/c)])
+
 (define (generate-racket req)
   (define types
     (make-hash))
@@ -284,4 +327,11 @@
              (newline)
              (pretty-print '(provide (all-defined-out)))))))))))
 
-(serialize (generate-racket (deserialize struct:code-generator-request)))
+(define (main . args)
+  (serialize (generate-racket (deserialize struct:code-generator-request))))
+
+(provide/contract
+ [generate-racket
+  (-> code-generator-request? code-generator-response?)])
+(provide
+ main)
