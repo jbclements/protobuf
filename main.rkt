@@ -134,7 +134,7 @@
                 (error 'serialize "cannot apply packed encoding to sized type"))
               (write-tag/type tag 'sized port)
               (write-sized
-               (cut for-each write-int* <> <>) vs port)]
+               (cut for-each write <> <>) vs port)]
              [else
               (write-tag/type tag ptype port)
               (write v port)])]
