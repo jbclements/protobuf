@@ -11,7 +11,7 @@
 
 @defstruct*[type-info
             ([name symbol?])
-	    #:transparent]{
+            #:transparent]{
 
   Common base of protocol buffer type information records.
 
@@ -20,7 +20,7 @@
 @defstruct*[(primitive-info type-info)
             ([type type/c]
              [reader (-> input-port? any/c)]
-	     [writer (-> any/c output-port? any)])]{
+             [writer (-> any/c output-port? any)])]{
 
   Information about a primitive protocol buffer type. The
   @racket[type] indicates the wire type of the primitive as used by
@@ -33,7 +33,7 @@
 
 @defstruct*[(enum-info type-info)
             ([integer->enum (-> exact-integer? any/c)]
-	     [enum->integer (-> any/c exact-integer?)])]{
+             [enum->integer (-> any/c exact-integer?)])]{
 
   Information about a user defined protocol buffer enumeration
   type.
@@ -67,8 +67,8 @@
 
 @defstruct*[(message-info type-info)
             ([constructor (-> any/c)]
-	     [fields (hash/c exact-nonnegative-integer? field?)]
-	     [required (set/c exact-nonnegative-integer?)])]{
+             [fields (hash/c exact-nonnegative-integer? field?)]
+             [required (set/c exact-nonnegative-integer?)])]{
 
   Information about a user defined protocol buffer message type.
 
@@ -88,10 +88,10 @@
 
 @defstruct*[field-info
             ([type (or/c primitive-info? enum-info? struct-type?)]
-	     [repeated? any/c]
-	     [packed? any/c]
-	     [accessor (->* (any/c) (any/c) any/c)]
-	     [mutator (-> any/c any/c any)])]{
+             [repeated? any/c]
+             [packed? any/c]
+             [accessor (->* (any/c) (any/c) any/c)]
+             [mutator (-> any/c any/c any)])]{
 
   Information about a field in a user defined protocol buffer
   message. The @racket[type] of the field can contain primitive
@@ -111,8 +111,8 @@
 
 @defstruct*[message
             ([extensions (hash/c exact-nonnegative-integer? any/c)]
-	     [unknown bytes?])
-	    #:mutable #:transparent]{
+             [unknown bytes?])
+            #:mutable #:transparent]{
 
   The common base of all protocol buffer message types. While regular
   fields of a message are stored in fields of @racket[message]'s
