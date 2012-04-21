@@ -22,9 +22,14 @@
   '("Protocol Buffer serialization library and ProtoC code generator plugin"))
 (define categories
   '(io net))
+(define repositories
+  '("4.x"))
 
 (define version
-  "1.0.0")
+  "1.0")
+(define release-notes
+  '((dl
+     (dt "1.0") (dd "Initial release"))))
 
 (define primary-file
   "main.rkt")
