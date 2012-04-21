@@ -5,8 +5,6 @@
 
 @table-of-contents[]
 
-@section{Message I/O}
-
 @defmodule[(planet murphy/protobuf)]{
 
   Facilities to read and write @link["http://protobuf.googlecode.com/"]{Protocol Buffers}
