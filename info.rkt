@@ -26,9 +26,10 @@
   '("4.x"))
 
 (define version
-  "1.0")
+  "1.1")
 (define release-notes
   '((dl
+     (dt "1.1") (dd "Destructive message merging, serialized field sorting")
      (dt "1.0") (dd "Initial release"))))
 
 (define primary-file

@@ -304,7 +304,7 @@
            (parameterize ([print-as-expression #f])
              (display "#lang racket/base")
              (newline)
-             (display ";; Generated using protoc-gen-racket v1.0.0")
+             (display ";; Generated using protoc-gen-racket v1.1")
              (newline)
              (pretty-print
               `(require
