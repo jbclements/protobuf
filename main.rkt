@@ -117,7 +117,9 @@
   (let ([info (force (protobuf-ref msg))])
     (let ([fields (message-info-fields info)]
           [required (message-info-required info)])
-      (for ([(tag field) (in-hash fields)]
+      (for ([tag (sort (hash-keys fields) <)]
+	    #:when #t
+	    [field (in-value (hash-ref fields tag))]
             #:when #t
             [vs (in-value ((field-info-accessor field) msg))]
             #:when (not (void? vs))
