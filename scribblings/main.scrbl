@@ -13,11 +13,12 @@
   
 }
 
-@defproc[(deserialize [type struct-type?] [in input-port? (current-input-port)]) any/c]{
+@defproc[(deserialize [type/msg (or/c struct-type? struct?)] [in input-port? (current-input-port)]) any/c]{
 
-  Read an instance of @racket[type] encoded in protocol buffer format
-  from the port @racket[in]. @racket[type] must represent a protocol
-  buffer message type.
+  Read a structure instance encoded in protocol buffer format from the
+  port @racket[in]. @racket[type/msg] can either represent a protocol
+  buffer message type or be an existing protocol buffer message that
+  will be destructively merged with the newly read data.
 
 }
 

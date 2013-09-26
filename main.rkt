@@ -33,9 +33,9 @@
 (define ((appender accessor mutator) msg v)
   (mutator msg (append (accessor msg null) (if (list? v) v (list v)))))
 
-(define (deserialize type [port (current-input-port)])
-  (let ([info (force (protobuf-ref type))])
-    (letrec ([msg ((message-info-constructor info))]
+(define (deserialize type/msg [port (current-input-port)])
+  (let ([info (force (protobuf-ref type/msg))])
+    (letrec ([msg (if (struct-type? type/msg) ((message-info-constructor info)) type/msg)]
              [fields (message-info-fields info)]
              [required (message-info-required info)]
              [unknown (open-output-bytes)])
@@ -86,7 +86,12 @@
                       msg
                       (cond
                         [(eq? type 'sized)
-                         (read-sized (cut deserialize stype <>) port)]
+                         (let ([proto
+                                (if repeated?
+                                    stype
+                                    (let ([proto (accessor msg)])
+                                      (if (void? proto) stype proto)))])
+                           (read-sized (cut deserialize proto <>) port))]
                         [else
                          (let-values ([(line1 col1 pos1) (port-next-location port)])
                            (raise-read-error
@@ -158,7 +163,7 @@
 
 (provide/contract
  [deserialize
-  (->* (struct-type?)
+  (->* ((or/c struct-type? struct?))
        (input-port?)
        any)]
  [serialize
