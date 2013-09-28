@@ -294,10 +294,15 @@
      #:file
      (for/list ([proto-file (code-generator-request-file-to-generate req)]
                 #:when #t
-                [racket-file (in-value (path-replace-suffix proto-file ".rkt"))]
-                [proto (in-value (hash-ref protos proto-file))])
+                [racket-file
+                 (in-value
+                  (path-replace-suffix
+                   (string->some-system-path proto-file 'unix) ".rkt"))]
+                [proto
+                 (in-value
+                  (hash-ref protos proto-file))])
        (code-generator-response:file*
-        #:name (path->string racket-file)
+        #:name (some-system-path->string racket-file)
         #:content
         (with-output-to-string
          (λ ()
@@ -310,18 +315,19 @@
               `(require
                 (planet murphy/protobuf:1/syntax)
                 ,@(for/list ([dep (in-list (file-descriptor-proto-dependency proto))])
-                    (path->string
+                    (some-system-path->string
                      (find-relative-path
                       (let-values ([(base name dir?) (split-path racket-file)])
                         (cond
                           [dir?
-                           racket-file]
+                           (path->complete-path racket-file "/")]
                           [(memq base '(relative #f))
                            "/"]
                           [else
-                           (build-path/convention-type 'unix "/" base)]))
-                      (let ([target (path-replace-suffix dep ".rkt")])
-                        (build-path/convention-type 'unix "/" target)))))))
+                           (path->complete-path base "/")]))
+                      (path->complete-path
+                       (path-replace-suffix (string->some-system-path dep 'unix) ".rkt")
+                       "/"))))))
              (newline)
              (for-each pretty-print (translate-types types proto))
              (newline)
