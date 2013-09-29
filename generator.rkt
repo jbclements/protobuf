@@ -279,6 +279,9 @@
       (or/c string? #f) field-descriptor-proto?
       any/c)])
 
+(define unix-root
+  (string->some-system-path "/" 'unix))
+
 (define (generate-racket req)
   (define types
     (make-hash))
@@ -320,14 +323,14 @@
                       (let-values ([(base name dir?) (split-path racket-file)])
                         (cond
                           [dir?
-                           (path->complete-path racket-file "/")]
+                           (path->complete-path racket-file unix-root)]
                           [(memq base '(relative #f))
-                           "/"]
+                           unix-root]
                           [else
-                           (path->complete-path base "/")]))
+                           (path->complete-path base unix-root)]))
                       (path->complete-path
                        (path-replace-suffix (string->some-system-path dep 'unix) ".rkt")
-                       "/"))))))
+                       unix-root))))))
              (newline)
              (for-each pretty-print (translate-types types proto))
              (newline)
