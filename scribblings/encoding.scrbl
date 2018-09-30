@@ -3,7 +3,7 @@
 
 @title{Encoding}
 
-@defmodule[(planet murphy/protobuf/encoding)]{
+@defmodule[protobuf/encoding]{
 
   Low-level functions dealing with the binary wire format of protocol
   buffers.

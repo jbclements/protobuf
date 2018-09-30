@@ -5,7 +5,7 @@
 
 @table-of-contents[]
 
-@defmodule[(planet murphy/protobuf)]{
+@defmodule[protobuf]{
 
   Facilities to read and write @link["http://protobuf.googlecode.com/"]{Protocol Buffers}
   in binary format. The basic message type is re-exported from the

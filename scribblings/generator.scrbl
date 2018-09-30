@@ -18,7 +18,7 @@ necessary.
 
 @section{Programming Interface}
 
-@defmodule[(planet murphy/protobuf/generator)]{
+@defmodule[protobuf/generator]{
 
   Functions to convert Protocol Buffer descriptors into Racket code.
 
@@ -123,21 +123,21 @@ necessary.
 
 @section{Generated Modules}
 
-@defmodule[(planet murphy/protobuf/google/protobuf/descriptor)]{
+@defmodule[protobuf/google/protobuf/descriptor]{
 
   Protocol buffer descriptor types. Definitions are generated from
   @litchar{google/protobuf/descriptor.proto}.
 
 }
 
-@defmodule[(planet murphy/protobuf/google/protobuf/compiler/plugin)]{
+@defmodule[protobuf/google/protobuf/compiler/plugin]{
 
   The ProtoC compiler plug-in interface. Definitions are generated from
   @litchar{google/protobuf/compiler/plugin.proto}.
 
 }
 
-@defmodule[(planet murphy/protobuf/extend/protobuf/bigint)]{
+@defmodule[protobuf/extend/protobuf/bigint]{
 
   Big integer support extensions for
   @tt{protoc-gen-racket}. Definitions are generated from

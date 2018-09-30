@@ -3,7 +3,7 @@
 
 @title{Reflection}
 
-@defmodule[(planet murphy/protobuf/reflection)]{
+@defmodule[protobuf/reflection]{
 
   Generic functionality for protocol buffer data and types.
 
