@@ -28,7 +28,8 @@
  "main.rkt"
  "google/protobuf/descriptor.rkt"
  "google/protobuf/compiler/plugin.rkt"
- "extend/protobuf/bigint.rkt")
+ "extend/protobuf/bigint.rkt"
+ )
 
 (define-syntax doto
   (syntax-rules ()
@@ -316,7 +317,7 @@
              (newline)
              (pretty-print
               `(require
-                (planet murphy/protobuf:1/syntax)
+                 protobuf/syntax
                 ,@(for/list ([dep (in-list (file-descriptor-proto-dependency proto))])
                     (some-system-path->string
                      (find-relative-path

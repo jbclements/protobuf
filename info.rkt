@@ -1,4 +1,4 @@
-#lang setup/infotab
+#lang info
 ;; This file is part of Protocol Buffers for Racket.
 ;; Copyright (c) 2012 by Thomas Chust <chust@web.de>
 ;;
@@ -16,17 +16,29 @@
 ;; You should have received a copy of the GNU Lesser General Public
 ;; License along with Protocol Buffers for Racket. If not, see
 ;; <http://www.gnu.org/licenses/>.
-(define name
+
+(define version "1.1")
+(define deps '())
+(define build-deps '())
+(define collection "protobuf")
+
+(define scribblings
+  '(("scribblings/main.scrbl" (multi-page) (interop))
+    ("scribblings/generator.scrbl" (multi-page) (tool))))
+
+(define racket-launcher-names
+  '("protoc-gen-racket"))
+(define racket-launcher-flags
+  '(("-l" "protobuf/generator" "-m-")))
+
+
+#;((define name
   "Protocol Buffers")
 (define blurb
   '("Protocol Buffer serialization library and ProtoC code generator plugin"))
 (define categories
   '(io net))
-(define repositories
-  '("4.x"))
 
-(define version
-  "1.1")
 (define release-notes
   '((dl
      (dt "1.1") (dd "Destructive message merging, serialized field sorting")
@@ -35,11 +47,6 @@
 (define primary-file
   "main.rkt")
 
-(define racket-launcher-names
-  '("protoc-gen-racket"))
-(define racket-launcher-flags
-  '(("-p" "murphy/protobuf:1/generator" "-m-")))
 
-(define scribblings
-  '(("scribblings/main.scrbl" (multi-page) (interop))
-    ("scribblings/generator.scrbl" (multi-page) (tool))))
+
+)

@@ -1,6 +1,6 @@
 #lang racket/base
 ;; Generated using protoc-gen-racket v1.1
-(require (planet murphy/protobuf:1/syntax))
+(require protobuf/syntax)
 
 (define-message-type
  file-descriptor-set

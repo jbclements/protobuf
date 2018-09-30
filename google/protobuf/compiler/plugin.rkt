@@ -1,6 +1,6 @@
 #lang racket/base
 ;; Generated using protoc-gen-racket v1.1
-(require (planet murphy/protobuf:1/syntax) "../descriptor.rkt")
+(require protobuf/syntax "../descriptor.rkt")
 
 (define-message-type
  code-generator-request
